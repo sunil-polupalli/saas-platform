@@ -20,8 +20,36 @@ exports.listTenants = async (req, res) => {
     if (req.user.role !== 'super_admin') {
       return res.status(403).json({ success: false, message: 'Unauthorized' });
     }
-    const tenants = await Tenant.findAll();
-    res.json({ success: true, data: tenants });
+
+    // --- MANDATORY FIX: Pagination Implementation ---
+    const { page = 1, limit = 10, status, subscriptionPlan } = req.query;
+    const offset = (page - 1) * limit;
+    
+    // Build filter object
+    const whereClause = {};
+    if (status) whereClause.status = status;
+    if (subscriptionPlan) whereClause.subscriptionPlan = subscriptionPlan;
+
+    const { count, rows } = await Tenant.findAndCountAll({
+        where: whereClause,
+        limit: parseInt(limit),
+        offset: parseInt(offset),
+        order: [['createdAt', 'DESC']]
+    });
+
+    res.json({ 
+        success: true, 
+        data: {
+            tenants: rows,
+            pagination: {
+                total: count,
+                currentPage: parseInt(page),
+                totalPages: Math.ceil(count / limit),
+                limit: parseInt(limit)
+            }
+        } 
+    });
+    // ------------------------------------------------
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

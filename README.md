@@ -11,7 +11,7 @@ This application is a full-stack SaaS platform designed for organizations to man
 ---
 
 ## 📺 Video Demo
-**[🎥 Click here to watch the Project Walkthrough & Architecture Demo](INSERT YOUR YOUTUBE LINK HERE)**
+**[🎥 Click here to watch the Project Walkthrough & Architecture Demo](YOUR_ACTUAL_YOUTUBE_LINK_OR_DELETE_THIS_LINE)**
 
 ---
 
@@ -34,14 +34,17 @@ This application is a full-stack SaaS platform designed for organizations to man
     * Production-ready `docker-compose` setup.
     * Orchestrates Database, Backend, and Frontend with a single command.
     * **Auto-Healing:** Backend waits for Database readiness before starting.
-6.  **🔄 Automated Database Operations**
+6.  **💾 Robust Data Persistence**
+    * Configured **Named Docker Volumes** for PostgreSQL.
+    * Data survives container restarts and shutdowns, ensuring no data loss.
+7.  **🔄 Automated Database Operations**
     * **Zero-Touch Startup:** Migrations and Seed Data run automatically on container startup.
     * No manual SQL execution required.
-7.  **🛡️ Security Best Practices**
+8.  **🛡️ Security Best Practices**
     * **Helmet:** Sets secure HTTP headers.
     * **CORS:** Configured for frontend-backend communication.
     * **Input Validation:** Strict typing on API endpoints.
-8.  **📱 Modern Responsive UI**
+9.  **📱 Modern Responsive UI**
     * Built with **React + Vite + Tailwind CSS**.
     * Dynamic Sidebar navigation based on user role.
     * Real-time dashboard statistics.
@@ -93,7 +96,7 @@ The system follows a **Three-Tier Architecture**:
 
 **1. Clone the Repository**
 ```bash
-git clone https://github.com/sunil-polupalli/saas-platform.git
+git clone [https://github.com/sunil-polupalli/saas-platform.git](https://github.com/sunil-polupalli/saas-platform.git)
 cd saas-platform
 
 ```
@@ -109,9 +112,7 @@ docker-compose up -d --build
 **3. Verify Installation**
 
 * **Backend:** Visit [http://localhost:5000/api/health](https://www.google.com/search?q=http://localhost:5000/api/health)
-* *Expected Response:* `{"status":"ok","message":"Backend is running"}`
-
-
+* *Expected Response:* `{"status":"ok","database":"connected"}`
 * **Frontend:** Visit [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000)
 
 **4. Stop the Application**

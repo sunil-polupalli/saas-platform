@@ -94,6 +94,12 @@ exports.deleteUser = async (req, res) => {
       return res.status(403).json({ success: false, message: 'Unauthorized' });
     }
 
+    // --- MANDATORY FIX: Prevent self-deletion ---
+    if (req.params.id === req.user.id) {
+        return res.status(403).json({ success: false, message: 'Cannot delete yourself' });
+    }
+    // --------------------------------------------
+
     const userToDelete = await User.findOne({ 
       where: { id: req.params.id, tenantId: req.user.tenantId } 
     });
