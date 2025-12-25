@@ -22,10 +22,15 @@ const Task = sequelize.define('Task', {
   tenantId: {
     type: DataTypes.UUID,
     allowNull: false
+  },
+  // FIX: Added assignedTo field
+  assignedTo: {
+    type: DataTypes.UUID,
+    allowNull: true
   }
 }, {
   timestamps: true,
-  tableName: 'tasks' // <--- Forces lowercase table name
+  tableName: 'tasks'
 });
 
 module.exports = Task;

@@ -15,12 +15,14 @@ Tenant.hasMany(AuditLog, { foreignKey: 'tenantId', as: 'auditLogs' });
 
 // User relationships
 User.belongsTo(Tenant, { foreignKey: 'tenantId', as: 'tenant' });
-User.hasMany(Project, { foreignKey: 'createdBy', as: 'createdProjects' });
+// FIX: Using 'createdById' to match the database column
+User.hasMany(Project, { foreignKey: 'createdById', as: 'createdProjects' });
 User.hasMany(Task, { foreignKey: 'assignedTo', as: 'assignedTasks' });
 
 // Project relationships
 Project.belongsTo(Tenant, { foreignKey: 'tenantId', as: 'tenant' });
-Project.belongsTo(User, { foreignKey: 'createdBy', as: 'creator' });
+// FIX: Using 'createdById' to match the database column
+Project.belongsTo(User, { foreignKey: 'createdById', as: 'creator' });
 Project.hasMany(Task, { foreignKey: 'projectId', as: 'tasks' });
 
 // Task relationships
